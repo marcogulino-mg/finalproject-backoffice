@@ -20,13 +20,12 @@ import jakarta.validation.constraints.Size;
 @Table(name = "users")
 public class User {
     // INFO: Attributes/Columns
-
     // Explanation: Primary KEY with autoincrement strategy
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    // Explanation: user-name varchar(30)
+    // Explanation: user_name varchar(30)
     @NotBlank(message = "The username must not be blank, empty or null")
     @Column(name = "user_name", nullable = false, length = 30)
     private String userName;
@@ -37,7 +36,7 @@ public class User {
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
-    // Explanation: ManyToMany join with roles entity
+    // Explanation: ManyToMany join with Role entity
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

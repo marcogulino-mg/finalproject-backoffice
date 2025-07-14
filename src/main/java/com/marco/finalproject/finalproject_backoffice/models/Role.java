@@ -14,26 +14,50 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-// Explanation: roles is a JPA Entity (Map a table in the DB)
+// Explanation: Role is a JPA Entity (Map a table in the DB)
 @Entity
 @Table(name = "roles")
 public class Role {
 
     // INFO: Attributes/Columns
-
     // Explanation: Primary KEY with autoincrement strategy
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    // Explanation: role-name varchar(30)
+    // Explanation: role_name varchar(30)
     @NotBlank(message = "The username must not be blank, empty or null")
     @Column(name = "role_name", nullable = false, length = 30)
     private String roleName;
 
-    // Explanation: ManyToMany join with roles entity
+    // Explanation: ManyToMany join with User entity
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonBackReference
     private Set<User> users;
+
+    // INFO: Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
 }
