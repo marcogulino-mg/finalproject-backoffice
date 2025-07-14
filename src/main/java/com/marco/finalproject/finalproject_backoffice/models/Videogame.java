@@ -35,16 +35,17 @@ public class Videogame {
 
     // Explanation: publicationDate format: DD/MM/YYYY
     @NotNull(message = "The publication date must not be null")
+    @Column(name = "publication_date", nullable = false)
     private LocalDate publicationDate;
 
     // Explanation: publisher varchar(50)
     @NotBlank(message = "The publisher name must not be blank, empty or null")
-    @Column(name = "vg_name", nullable = false, length = 50)
+    @Column(name = "publisher", nullable = false, length = 50)
     private String publisher;
 
     // Explanation: developer varchar(50)
     @NotBlank(message = "The developer name must not be blank, empty or null")
-    @Column(name = "vg_name", nullable = false, length = 50)
+    @Column(name = "developer", nullable = false, length = 50)
     private String developer;
 
     // Explanation: description text with 20000 max chars
