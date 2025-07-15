@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+  <head>
+    <th:block
+      th:replace="~{ fragments/head :: generic-head(HomePage) }"
+    ></th:block>
+  </head>
+  <body>
+    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <h2>HomePage</h2>
+    <th:block
+      th:replace="~{ fragments/header :: bootstrapJS }"
+    ></th:block>
+  </body>
+</html>
