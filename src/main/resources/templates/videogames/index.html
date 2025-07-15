@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Placeholder</title>
+  </head>
+  <body>
+    <ul th:each="videogame : ${videogames}">
+      <li th:text="${videogame.vgName}"></li>
+      <li th:text="${videogame.publicationDate}"></li>
+      <li th:text="${videogame.publisher}"></li>
+      <li th:text="${videogame.developer}"></li>
+      <li th:text="${videogame.description}"></li>
+      <li th:text="${videogame.coverUrl}"></li>
+    </ul>
+    <h2 th:text="${videogames.size}"></h2>
+  </body>
+</html>
