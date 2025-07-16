@@ -7,65 +7,84 @@
   </head>
   <body>
     <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
-    <ul th:each="videogame : ${videogames}">
-      <li th:text="${videogame.vgName}"></li>
-      <li th:text="${videogame.publicationDate}"></li>
-      <li th:text="${videogame.publisher}"></li>
-      <li th:text="${videogame.developer}"></li>
-      <li th:text="${videogame.description}"></li>
-      <li th:text="${videogame.coverUrl}"></li>
-      <!-- Bottone per aprire il modal -->
-      <button
-        class="btn btn-danger"
-        type="button"
-        data-bs-toggle="modal"
-        th:data-bs-target="'#delete-modal-' + ${videogame.id}"
-      >
-        Delete
-      </button>
+    <main class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Publication Date</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Developer</th>
+            <th scope="col">Gestione</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="videogame : ${videogames}">
+            <th th:text="${videogame.id}"></th>
+            <td th:text="${videogame.vgName}"></td>
+            <td th:text="${videogame.publicationDate}"></td>
+            <td th:text="${videogame.publisher}"></td>
+            <td th:text="${videogame.developer}"></td>
+            <td>
+              <a class="btn btn-info" th:href="@{|/videogames/${videogame.id}|}" role="button">Info</a>
+              <button
+                class="btn btn-danger"
+                type="button"
+                data-bs-toggle="modal"
+                th:data-bs-target="'#delete-modal-' + ${videogame.id}"
+              >
+                Delete
+              </button>
 
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        th:id="'delete-modal-' + ${videogame.id}"
-        tabindex="-1"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <form th:action="@{|/videogames/delete/232|}" method="post">
-              <div class="modal-header">
-                <h1
-                  class="modal-title fs-5"
-                  th:text="|Rimozione di ${videogame.vgName}|"
-                ></h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                th:id="'delete-modal-' + ${videogame.id}"
+                tabindex="-1"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <form th:action="@{|/videogames/delete/232|}" method="post">
+                      <div class="modal-header">
+                        <h1
+                          class="modal-title fs-5"
+                          th:text="|Rimozione di ${videogame.vgName}|"
+                        ></h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <h6
+                          th:text="|Confermi di voler rimuovere ${videogame.vgName} con id: ${videogame.id}|"
+                        ></h6>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Annulla
+                        </button>
+                        <button class="btn btn-primary" type="submit">Conferma</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-              <div class="modal-body">
-                <h6
-                  th:text="|Confermi di voler rimuovere ${videogame.vgName} con id: ${videogame.id}|"
-                ></h6>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Annulla
-                </button>
-                <button class="btn btn-primary" type="submit">Conferma</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </ul>
-    <h2 th:text="${videogames.size}"></h2>
+            </ul>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h5 th:text="|Videogames registrati: ${videogames.size} |"></h5>
+    </main>
     <th:block th:replace="~{ fragments/header :: bootstrapJS }"></th:block>
   </body>
 </html>

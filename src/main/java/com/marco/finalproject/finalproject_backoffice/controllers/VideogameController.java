@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.marco.finalproject.finalproject_backoffice.models.Videogame;
 import com.marco.finalproject.finalproject_backoffice.services.VideogameService;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/videogames")
@@ -40,10 +39,15 @@ public class VideogameController {
 
     // INFO: DELETE
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable int id, Model model, HttpServletResponse response) {
-        if (!videogameService.deleteById(id)) {
-            return "errors/404";
-        }
+    public String delete(@PathVariable int id) {
+        videogameService.deleteById(id);
         return "redirect:/videogames";
+    }
+
+    // INFO: Search by vgName
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "vgName") String vgName, Model model) {
+        model.addAttribute("videogames", videogameService.searchByName(vgName));
+        return "videogames/index";
     }
 }

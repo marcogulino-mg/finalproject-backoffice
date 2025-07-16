@@ -7,14 +7,124 @@
   </head>
   <body>
     <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
-    <ul th:object="${videogame}">
-      <li th:text="*{vgName}"></li>
-      <li th:text="*{publicationDate}"></li>
-      <li th:text="*{publisher}"></li>
-      <li th:text="*{developer}"></li>
-      <li th:text="*{description}"></li>
-      <li th:text="*{coverUrl}"></li>
-    </ul>
+    <main class="container" th:object="${videogame}">
+      <div class="row mt-5 align-items-stretch">
+        <!-- Colonna sinistra -->
+        <div class="col-12 col-md-3 mb-5">
+          <img
+            th:src="*{coverUrl}"
+            class="img-fluid mh-100 w-100 object-fit-cover"
+            alt=""
+          />
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="col-12 col-md-9">
+          <div class="card h-100">
+            <h5 class="card-header" th:text="*{vgName}"></h5>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Descrizione</h5>
+              <p class="card-text" th:text="*{description}"></p>
+              <h5 class="card-title">Publisher</h5>
+              <p class="card-text" th:text="*{publisher}"></p>
+              <h5 class="card-title">Developer</h5>
+              <p class="card-text" th:text="*{developer}"></p>
+              <div class="mt-auto">
+                <a th:href="@{/videogames}" class="btn btn-primary"
+                  >Torna alla lista</a
+                >
+                <a href="#" class="btn btn-warning">Modifica</a>
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  data-bs-toggle="modal"
+                  th:data-bs-target="'#delete-modal-' + ${videogame.id}"
+                >
+                  Delete
+                </button>
+
+                <!-- Modal -->
+                <div
+                  class="modal fade"
+                  th:id="'delete-modal-' + ${videogame.id}"
+                  tabindex="-1"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <form
+                        th:action="@{|/videogames/delete/232|}"
+                        method="post"
+                      >
+                        <div class="modal-header">
+                          <h1
+                            class="modal-title fs-5"
+                            th:text="|Rimozione di ${videogame.vgName}|"
+                          ></h1>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <h6
+                            th:text="|Confermi di voler rimuovere ${videogame.vgName} con id: ${videogame.id}|"
+                          ></h6>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Annulla
+                          </button>
+                          <button class="btn btn-primary" type="submit">
+                            Conferma
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div
+        class="card mb-3 mt-5 text-bg-dark"
+        style="max-width: 1200px"
+        th:object="${videogame}"
+      >
+        <div
+          class="card-header fs-4 fw-bold border-danger-subtle"
+          th:text="*{vgName}"
+        ></div>
+        <div class="row g-0">
+          <div class="col-md-3">
+            <img
+              th:src="*{coverUrl}"
+              class="img-fluid rounded-start"
+              th:alt="|Cover di *{vgName}|"
+            />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text" th:text="*{description}"></p>
+              <p class="card-text">
+                <small
+                  class="text-body-secondary"
+                  th:text="|Pubblicato il *{publicationDate}|"
+                ></small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </main>
     <th:block th:replace="~{ fragments/header :: bootstrapJS }"></th:block>
   </body>
 </html>

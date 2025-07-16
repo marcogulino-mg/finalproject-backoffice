@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marco.finalproject.finalproject_backoffice.exceptions.MissingElementException;
 import com.marco.finalproject.finalproject_backoffice.models.Videogame;
 import com.marco.finalproject.finalproject_backoffice.repositories.VideogameRepo;
 
@@ -34,20 +35,26 @@ public class VideogameService {
     public Videogame getById(int id) {
         Optional<Videogame> vgAttempt = findById(id);
         if (vgAttempt.isEmpty()) {
-            // throw new RuntimeException("Missing Videogame");
+            throw new MissingElementException("Videogame non trovato");
         }
 
         return vgAttempt.get();
     }
 
     // Explanation: Delete by ID
-    public Boolean deleteById(int id) {
+    public void deleteById(int id) {
         if (existsById(id)) {
             videogameRepo.deleteById(id);
-            return true;
+        } else {
+            throw new MissingElementException("Videogame da rimuovere non trovato");
         }
 
-        return false;
+    }
+
+    // Explanation: Search by vgName
+    public List<Videogame> searchByName(String query) {
+        List<Videogame> videogames = videogameRepo.findByVgNameContaining(query);
+        return videogames;
     }
 
 }
