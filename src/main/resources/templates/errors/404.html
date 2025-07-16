@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{ fragments/head :: generic-head(404) }"></th:block>
+  </head>
+  <body>
+    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <h2>ERROR 404</h2>
+    <th:block th:replace="~{ fragments/header :: bootstrapJS }"></th:block>
+  </body>
+</html>

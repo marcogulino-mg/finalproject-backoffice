@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block
+      th:replace="~{ fragments/head :: generic-head(${videogame.vgName}) }"
+    ></th:block>
+  </head>
+  <body>
+    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <ul th:object="${videogame}">
+      <li th:text="*{vgName}"></li>
+      <li th:text="*{publicationDate}"></li>
+      <li th:text="*{publisher}"></li>
+      <li th:text="*{developer}"></li>
+      <li th:text="*{description}"></li>
+      <li th:text="*{coverUrl}"></li>
+    </ul>
+    <th:block th:replace="~{ fragments/header :: bootstrapJS }"></th:block>
+  </body>
+</html>
