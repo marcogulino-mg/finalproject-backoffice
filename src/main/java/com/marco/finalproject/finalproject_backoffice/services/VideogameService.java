@@ -57,4 +57,9 @@ public class VideogameService {
         return videogames;
     }
 
+    // Explanation: Create a new videogame
+    public Videogame create(Videogame videogame) {
+        return videogameRepo.save(videogame);
+    }
+
 }

@@ -23,18 +23,19 @@
           <tr th:each="videogame : ${videogames}">
             <th th:text="${videogame.id}"></th>
             <td th:text="${videogame.vgName}"></td>
-            <td th:text="${videogame.publicationDate}"></td>
+            <td th:text="${#temporals.format(videogame.publicationDate, 'dd/MM/yyyy')}"></td>
             <td th:text="${videogame.publisher}"></td>
             <td th:text="${videogame.developer}"></td>
             <td>
               <a class="btn btn-info" th:href="@{|/videogames/${videogame.id}|}" role="button">Info</a>
+              <a class="btn btn-warning" th:href="@{|/videogames/edit/${videogame.id}|}" role="button">Modifica</a>
               <button
                 class="btn btn-danger"
                 type="button"
                 data-bs-toggle="modal"
                 th:data-bs-target="'#delete-modal-' + ${videogame.id}"
               >
-                Delete
+                Rimuovi
               </button>
 
               <!-- Modal -->
@@ -45,7 +46,7 @@
               >
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
-                    <form th:action="@{|/videogames/delete/232|}" method="post">
+                    <form th:action="@{|/videogames/delete/${videogame.id}|}" method="post">
                       <div class="modal-header">
                         <h1
                           class="modal-title fs-5"

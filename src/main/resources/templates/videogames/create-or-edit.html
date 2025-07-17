@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block
+      th:replace="~{ fragments/head :: generic-head('Aggiungi Videogame') }"
+    ></th:block>
+  </head>
+  <body>
+    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <main class="container" th:object="${videogame}">
+      <form
+        th:action="${edit} ? @{|/videogames/edit/*{id}|} : @{/videogames/create}"
+        method="post"
+        class="mt-5"
+        id="videogame-form"
+      >
+        <input type="hidden" th:field="*{id}" />
+        <div class="mb-3">
+          <label for="vgName" class="form-label">Nome Videogioco</label>
+          <input
+            type="text"
+            class="form-control"
+            id="vgName"
+            th:field="*{vgName}"
+            th:errorClass="is-invalid"
+          />
+          <div th:if="${#fields.hasErrors('vgName')}" class="invalid-feedback">
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('vgName')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="publicationDate" class="form-label"
+            >Data di Pubblicazione</label
+          >
+          <div class="input-group">
+            <input
+              type="date"
+              class="form-control"
+              id="publicationDate"
+              th:field="*{publicationDate}"
+              th:errorClass="is-invalid"
+            />
+            <div
+              th:if="${#fields.hasErrors('publicationDate')}"
+              class="invalid-feedback"
+            >
+              <ul>
+                <li
+                  th:each="err : ${#fields.errors('publicationDate')}"
+                  th:text="${err}"
+                ></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="publisher" class="form-label">Publisher</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Amount (to the nearest dollar)"
+            id="publisher"
+            th:field="*{publisher}"
+            th:errorClass="is-invalid"
+          />
+          <div
+            th:if="${#fields.hasErrors('publisher')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('publisher')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="developer" class="form-label">Developer</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Amount (to the nearest dollar)"
+            id="developer"
+            th:field="*{developer}"
+            th:errorClass="is-invalid"
+          />
+          <div
+            th:if="${#fields.hasErrors('developer')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('developer')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Descrizione</label>
+          <textarea
+            class="form-control"
+            aria-label="With textarea"
+            id="description"
+            th:field="*{description}"
+            th:errorClass="is-invalid"
+          ></textarea>
+          <div
+            th:if="${#fields.hasErrors('description')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('description')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="coverUrl" class="form-label">Cover IMG URL</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-describedby="basic-addon3 basic-addon4"
+            id="coverUrl"
+            th:field="*{coverUrl}"
+            th:errorClass="is-invalid"
+          />
+          <div
+            th:if="${#fields.hasErrors('coverUrl')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('coverUrl')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          th:text="${edit} ? 'Modifica Videogame' : 'Aggiungi Videogame'"
+        ></button>
+        <button type="reset" class="btn btn-warning">Reset Form</button>
+      </form>
+    </main>
+    <th:block th:replace="~{ fragments/header :: bootstrapJS }"></th:block>
+  </body>
+</html>
