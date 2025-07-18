@@ -11,10 +11,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 // Explanation: Videogame is a JPA Entity (Map a table in the DB)
 @Entity
@@ -36,9 +38,25 @@ public class Console {
     @Column(name = "publisher", nullable = false, length = 50)
     private String publisher;
 
+    // Explanation: description text with 20000 max chars
+    @Lob
+    @Size(max = 20000, message = "The description must not be over 20000 characters")
+    @Column(name = "description", nullable = true)
+    private String description;
+
     // Explanation: publicationDate format: DD/MM/YYYY
     @NotNull(message = "The publication date must not be null")
-    private LocalDate publicationDate;
+    private LocalDate releaseDate;
+
+    // Explanation: cover_url varcahr(255)
+    @Column(name = "cover_url", nullable = false, length = 255)
+    @NotBlank(message = "The cover url image must not be null, nor empty or blank")
+    private String coverUrl;
+
+    // Explanation: cover_url varcahr(255)
+    @Column(name = "small_icon_url", nullable = false, length = 255)
+    @NotBlank(message = "The icon url image must not be null, nor empty or blank")
+    private String smallIconUrl;
 
     @ManyToMany(mappedBy = "consoles", fetch = FetchType.LAZY)
     @JsonBackReference
@@ -69,12 +87,36 @@ public class Console {
         this.publisher = publisher;
     }
 
-    public LocalDate getPublicationDate() {
-        return publicationDate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPublicationDate(LocalDate publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
+    public String getSmallIconUrl() {
+        return smallIconUrl;
+    }
+
+    public void setSmallIconUrl(String smallIconUrl) {
+        this.smallIconUrl = smallIconUrl;
     }
 
     public List<Videogame> getVideogames() {

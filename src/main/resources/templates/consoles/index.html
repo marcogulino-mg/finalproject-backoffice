@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block
+      th:replace="~{ fragments/head :: generic-head(Consoles) }"
+    ></th:block>
+  </head>
+  <body>
+    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <main class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Gestione</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="console : ${consoles}">
+            <th th:text="${console.id}"></th>
+            <td th:text="${console.consoleName}"></td>
+            <td th:text="${#temporals.format(console.releaseDate, 'dd/MM/yyyy')}"></td>
+            <td th:text="${console.publisher}"></td>
+            <td>
+              <a class="btn btn-info" th:href="@{|/consoles/${console.id}|}" role="button">Info</a>
+              <a class="btn btn-warning" th:href="@{|/consoles/edit/${console.id}|}" role="button">Modifica</a>
+              <button
+                class="btn btn-danger"
+                type="button"
+                data-bs-toggle="modal"
+                th:data-bs-target="'#delete-modal-' + ${console.id}"
+              >
+                Rimuovi
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                th:id="'delete-modal-' + ${console.id}"
+                tabindex="-1"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <form th:action="@{|/consoles/delete/${console.id}|}" method="post">
+                      <div class="modal-header">
+                        <h1
+                          class="modal-title fs-5"
+                          th:text="|Rimozione di ${console.consoleName}|"
+                        ></h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <h6
+                          th:text="|Confermi di voler rimuovere ${console.consoleName} con id: ${console.id}|"
+                        ></h6>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Annulla
+                        </button>
+                        <button class="btn btn-primary" type="submit">Conferma</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h5 th:text="|Consoles registrate: ${consoles.size} |"></h5>
+    </main>
+    <th:block th:replace="~{ fragments/header :: bootstrapJS }"></th:block>
+  </body>
+</html>
