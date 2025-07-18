@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.marco.finalproject.finalproject_backoffice.models.Console;
@@ -21,7 +22,6 @@ public class ConsoleController {
 
     // INFO: CRUD
     // INFO: INDEX
-
     @GetMapping
     public String index(Model model) {
         List<Console> consoles = consoleService.findAll();
@@ -35,4 +35,12 @@ public class ConsoleController {
         model.addAttribute("console", consoleService.getById(id));
         return "consoles/show";
     }
+
+    // INFO: DELETE
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable int id) {
+        consoleService.deleteById(id);
+        return "redirect:/consoles";
+    }
+
 }

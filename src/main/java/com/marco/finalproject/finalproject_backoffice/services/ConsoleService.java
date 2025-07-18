@@ -16,17 +16,22 @@ public class ConsoleService {
     @Autowired
     private ConsoleRepo consoleRepo;
 
-    // Explanation: Show every videogames
+    // Explanation: Check if a console exists
+    public Boolean existsById(int id) {
+        return consoleRepo.existsById(id);
+    }
+
+    // Explanation: Show every consoles
     public List<Console> findAll() {
         return consoleRepo.findAll();
     }
 
-    // Explanation: Find single videogame using id
+    // Explanation: Find single console using id
     public Optional<Console> findById(int id) {
         return consoleRepo.findById(id);
     }
 
-    // Explanation: Check if the videogame exists
+    // Explanation: Check if the console exists and get it
     public Console getById(int id) {
         Optional<Console> consoleAttempt = findById(id);
         if (consoleAttempt.isEmpty()) {
@@ -34,5 +39,14 @@ public class ConsoleService {
         }
 
         return consoleAttempt.get();
+    }
+
+    // Explanation: Delete by ID
+    public void deleteById(int id) {
+        if (existsById(id)) {
+            consoleRepo.deleteById(id);
+        } else {
+            throw new MissingElementException("Console da rimuovere non trovata");
+        }
     }
 }

@@ -31,7 +31,7 @@ public class VideogameService {
         return videogameRepo.findById(id);
     }
 
-    // Explanation: Check if the videogame exists
+    // Explanation: Check if the videogame exists and get it
     public Videogame getById(int id) {
         Optional<Videogame> vgAttempt = findById(id);
         if (vgAttempt.isEmpty()) {
