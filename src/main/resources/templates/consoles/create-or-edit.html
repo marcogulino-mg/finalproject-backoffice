@@ -2,56 +2,57 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <th:block
-      th:replace="~{ fragments/head :: generic-head('Aggiungi Videogame') }"
+      th:replace="~{ fragments/head :: generic-head('Aggiungi Console') }"
     ></th:block>
   </head>
   <body>
     <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
-    <main class="container" th:object="${videogame}">
+    <main class="container" th:object="${console}">
       <form
-        th:action="${edit} ? @{|/videogames/edit/*{id}|} : @{/videogames/create}"
+        th:action="${edit} ? @{|/consoles/edit/*{id}|} : @{/consoles/create}"
         method="post"
         class="mt-5"
-        id="videogame-form"
+        id="console-form"
       >
         <input type="hidden" th:field="*{id}" />
         <div class="mb-3">
-          <label for="vgName" class="form-label">Nome Videogioco</label>
+          <label for="consoleName" class="form-label">Console Name</label>
           <input
             type="text"
             class="form-control"
-            id="vgName"
-            th:field="*{vgName}"
+            id="consoleName"
+            th:field="*{consoleName}"
             th:errorClass="is-invalid"
           />
-          <div th:if="${#fields.hasErrors('vgName')}" class="invalid-feedback">
+          <div
+            th:if="${#fields.hasErrors('consoleName')}"
+            class="invalid-feedback"
+          >
             <ul>
               <li
-                th:each="err : ${#fields.errors('vgName')}"
+                th:each="err : ${#fields.errors('consoleName')}"
                 th:text="${err}"
               ></li>
             </ul>
           </div>
         </div>
         <div class="mb-3">
-          <label for="publicationDate" class="form-label"
-            >Data di Pubblicazione</label
-          >
+          <label for="releaseDate" class="form-label">Release Date</label>
           <div class="input-group">
             <input
               type="date"
               class="form-control"
-              id="publicationDate"
-              th:field="*{publicationDate}"
+              id="releaseDate"
+              th:field="*{releaseDate}"
               th:errorClass="is-invalid"
             />
             <div
-              th:if="${#fields.hasErrors('publicationDate')}"
+              th:if="${#fields.hasErrors('releaseDate')}"
               class="invalid-feedback"
             >
               <ul>
                 <li
-                  th:each="err : ${#fields.errors('publicationDate')}"
+                  th:each="err : ${#fields.errors('releaseDate')}"
                   th:text="${err}"
                 ></li>
               </ul>
@@ -80,29 +81,7 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="developer" class="form-label">Developer</label>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Amount (to the nearest dollar)"
-            id="developer"
-            th:field="*{developer}"
-            th:errorClass="is-invalid"
-          />
-          <div
-            th:if="${#fields.hasErrors('developer')}"
-            class="invalid-feedback"
-          >
-            <ul>
-              <li
-                th:each="err : ${#fields.errors('developer')}"
-                th:text="${err}"
-              ></li>
-            </ul>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Descrizione</label>
+          <label for="description" class="form-label">Description</label>
           <textarea
             class="form-control"
             aria-label="With textarea"
@@ -144,10 +123,32 @@
             </ul>
           </div>
         </div>
+        <div class="mb-3">
+          <label for="coverUrl" class="form-label">Icon URL</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-describedby="basic-addon3 basic-addon4"
+            id="smallIconUrl"
+            th:field="*{smallIconUrl}"
+            th:errorClass="is-invalid"
+          />
+          <div
+            th:if="${#fields.hasErrors('smallIconUrl')}"
+            class="invalid-feedback"
+          >
+            <ul>
+              <li
+                th:each="err : ${#fields.errors('smallIconUrl')}"
+                th:text="${err}"
+              ></li>
+            </ul>
+          </div>
+        </div>
         <button
           type="submit"
           class="btn btn-primary"
-          th:text="${edit} ? 'Modifica Videogame' : 'Aggiungi Videogame'"
+          th:text="${edit} ? 'Modifica Console' : 'Aggiungi Console'"
         ></button>
         <button type="reset" class="btn btn-warning">Reset Form</button>
       </form>

@@ -49,4 +49,9 @@ public class ConsoleService {
             throw new MissingElementException("Console da rimuovere non trovata");
         }
     }
+
+    // Explanation: Create a new console
+    public Console create(Console console) {
+        return consoleRepo.save(console);
+    }
 }
