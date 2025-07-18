@@ -65,4 +65,22 @@ public class ConsoleController {
         return "redirect:/consoles";
     }
 
+    // INFO: EDIT & UPDATE
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable int id, Model model) {
+        model.addAttribute("console", consoleService.getById(id));
+        model.addAttribute("edit", true);
+        return "consoles/create-or-edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@Valid @ModelAttribute("console") Console formConsole, BindingResult bindingResult,
+            Model model, @PathVariable int id) {
+        if (bindingResult.hasErrors()) {
+            return "consoles/create-or-edit";
+        }
+
+        consoleService.create(formConsole);
+        return "redirect:/consoles/" + id;
+    }
 }
