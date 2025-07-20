@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.marco.finalproject.finalproject_backoffice.models.Videogame;
+import com.marco.finalproject.finalproject_backoffice.services.ConsoleService;
 import com.marco.finalproject.finalproject_backoffice.services.VideogameService;
 
 import jakarta.validation.Valid;
@@ -24,6 +25,9 @@ public class VideogameController {
     // INFO: IMPORT Services
     @Autowired
     VideogameService videogameService;
+
+    @Autowired
+    ConsoleService consoleService;
 
     // INFO: CRUD
     // INFO: INDEX
@@ -59,6 +63,7 @@ public class VideogameController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("videogame", new Videogame());
+        model.addAttribute("consoles", consoleService.findAll());
         return "videogames/create-or-edit";
     }
 
@@ -66,6 +71,7 @@ public class VideogameController {
     public String store(@Valid @ModelAttribute("videogame") Videogame formVideogame, BindingResult bindingResult,
             Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("consoles", consoleService.findAll());
             return "videogames/create-or-edit";
         }
 
@@ -77,6 +83,7 @@ public class VideogameController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("videogame", videogameService.getById(id));
+        model.addAttribute("consoles", consoleService.findAll());
         model.addAttribute("edit", true);
         return "videogames/create-or-edit";
     }
@@ -85,6 +92,7 @@ public class VideogameController {
     public String update(@Valid @ModelAttribute("videogame") Videogame formVideogame, BindingResult bindingResult,
             Model model, @PathVariable int id) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("consoles", consoleService.findAll());
             return "videogames/create-or-edit";
         }
 
