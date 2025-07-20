@@ -6,7 +6,9 @@
     ></th:block>
   </head>
   <body>
-    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <th:block
+      th:replace="~{ fragments/header :: header-frag('consoles') }"
+    ></th:block>
     <main class="container" th:object="${console}">
       <div class="row mt-5 align-items-stretch">
         <!-- Colonna sinistra -->

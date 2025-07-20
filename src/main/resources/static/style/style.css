@@ -1,0 +1,25 @@
+/* Generics */
+ul{
+    list-style: none;
+    padding-left: 0 !important;   
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Consoles */
+/* Consoles small icons */
+.container-consoles-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.small-icon-console {
+    max-width: 100%;
+}
+
+.consoles-list{
+    width: 50px;
+}

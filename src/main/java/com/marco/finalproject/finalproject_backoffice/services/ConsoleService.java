@@ -54,4 +54,10 @@ public class ConsoleService {
     public Console create(Console console) {
         return consoleRepo.save(console);
     }
+
+    // Explanation: Search by vgName
+    public List<Console> searchByName(String query) {
+        List<Console> consoles = consoleRepo.findByConsoleNameContaining(query);
+        return consoles;
+    }
 }

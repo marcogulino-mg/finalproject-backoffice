@@ -6,7 +6,9 @@
     ></th:block>
   </head>
   <body>
-    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <th:block
+      th:replace="~{ fragments/header :: header-frag('consoles') }"
+    ></th:block>
     <main class="container" th:object="${console}">
       <form
         th:action="${edit} ? @{|/consoles/edit/*{id}|} : @{/consoles/create}"

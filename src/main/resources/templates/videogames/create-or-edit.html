@@ -6,7 +6,9 @@
     ></th:block>
   </head>
   <body>
-    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <th:block
+      th:replace="~{ fragments/header :: header-frag('videogames') }"
+    ></th:block>
     <main class="container" th:object="${videogame}">
       <form
         th:action="${edit} ? @{|/videogames/edit/*{id}|} : @{/videogames/create}"

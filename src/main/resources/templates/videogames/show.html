@@ -6,7 +6,9 @@
     ></th:block>
   </head>
   <body>
-    <th:block th:replace="~{ fragments/header :: header-frag }"></th:block>
+    <th:block
+      th:replace="~{ fragments/header :: header-frag('videogames') }"
+    ></th:block>
     <main class="container" th:object="${videogame}">
       <div class="row mt-5 align-items-stretch">
         <!-- Colonna sinistra -->
@@ -41,6 +43,24 @@
                 class="card-text"
                 th:text="${#temporals.format(videogame.publicationDate, 'dd/MM/yyyy')}"
               ></p>
+              <h5 class="card-title">Consoles</h5>
+              <div>
+                <ul class="container-consoles-list">
+                  <li
+                    class="consoles-list"
+                    th:each="console : ${videogame.consoles}"
+                  >
+                    <a th:href="@{|/consoles/${console.id}|}">
+                      <img
+                        class="small-icon-console"
+                        th:src="${console.smallIconUrl}"
+                        th:alt="${console.consoleName}"
+                      />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
               <div class="mt-auto">
                 <a th:href="@{/videogames}" class="btn btn-primary"
                   >Torna alla lista</a

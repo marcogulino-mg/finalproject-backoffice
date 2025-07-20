@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.marco.finalproject.finalproject_backoffice.models.Console;
 import com.marco.finalproject.finalproject_backoffice.services.ConsoleService;
@@ -38,6 +39,13 @@ public class ConsoleController {
     public String show(@PathVariable int id, Model model) {
         model.addAttribute("console", consoleService.getById(id));
         return "consoles/show";
+    }
+
+    // INFO: SEARCH (ByName)
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "consoleName") String consoleName, Model model) {
+        model.addAttribute("consoles", consoleService.searchByName(consoleName));
+        return "consoles/index";
     }
 
     // INFO: DELETE

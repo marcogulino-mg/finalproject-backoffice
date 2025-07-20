@@ -1,6 +1,8 @@
 <th:block th:fragment="generic-head(title)">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CUSTOM CSS -->
+    <link th:rel="stylesheet" th:href="@{/style/style.css}">
     <!-- BOOTSTRAP CSS -->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.7/css/bootstrap.min.css}">
     <title th:text="${title}"></title>
