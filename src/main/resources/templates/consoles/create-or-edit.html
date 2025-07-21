@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <th:block
-      th:replace="~{ fragments/head :: generic-head('Aggiungi Console') }"
+      th:replace="~{ fragments/head :: generic-head(${edit} ? 'Modifica Console' : 'Aggiungi Console') }"
     ></th:block>
   </head>
   <body>

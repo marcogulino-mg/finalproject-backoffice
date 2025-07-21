@@ -3,6 +3,8 @@ package com.marco.finalproject.finalproject_backoffice.models;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -45,6 +47,7 @@ public class Console {
     private String description;
 
     // Explanation: publicationDate format: DD/MM/YYYY
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "The publication date must not be null")
     private LocalDate releaseDate;
 

@@ -3,6 +3,8 @@ package com.marco.finalproject.finalproject_backoffice.models;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,6 +36,7 @@ public class Videogame {
     private String vgName;
 
     // Explanation: publicationDate format: DD/MM/YYYY
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "The publication date must not be null")
     @Column(name = "publication_date", nullable = false)
     private LocalDate publicationDate;

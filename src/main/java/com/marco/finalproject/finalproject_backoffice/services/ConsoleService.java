@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.marco.finalproject.finalproject_backoffice.exceptions.MissingElementException;
 import com.marco.finalproject.finalproject_backoffice.models.Console;
+import com.marco.finalproject.finalproject_backoffice.models.Videogame;
 import com.marco.finalproject.finalproject_backoffice.repositories.ConsoleRepo;
 
 @Service
@@ -44,6 +45,17 @@ public class ConsoleService {
     // Explanation: Delete by ID
     public void deleteById(int id) {
         if (existsById(id)) {
+            // Get console by ID
+            Console console = getById(id);
+
+            // Get and remove console from every linked videogame
+            for (Videogame game : console.getVideogames()) {
+                game.getConsoles().remove(console);
+            }
+
+            // Delete the list of videogames linked to console
+            console.getVideogames().clear();
+
             consoleRepo.deleteById(id);
         } else {
             throw new MissingElementException("Console da rimuovere non trovata");
