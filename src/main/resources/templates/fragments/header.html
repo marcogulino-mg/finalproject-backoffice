@@ -39,6 +39,18 @@
             </ul>
           </li>
         </ul>
+        <div class="user-info">
+          <span class="text-light-emphasis"
+            >Welcome, <span sec:authentication="name" class="username"></span
+          ></span>
+          <span
+            sec:authentication="principal.authorities"
+            class="username text-light-emphasis"
+          ></span>
+          <a class="btn btn-sm btn-outline-primary mx-2" href="/logout"
+            >Sign out</a
+          >
+        </div>
         <form class="d-flex" role="search" th:action="${'/' + url + '/search'}">
           <input
             class="form-control me-2"

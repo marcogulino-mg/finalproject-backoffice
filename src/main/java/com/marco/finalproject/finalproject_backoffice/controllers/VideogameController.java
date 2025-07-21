@@ -3,6 +3,7 @@ package com.marco.finalproject.finalproject_backoffice.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,9 +33,10 @@ public class VideogameController {
     // INFO: CRUD
     // INFO: INDEX
     @GetMapping
-    public String index(Model model) {
+    public String index(Authentication authentication, Model model) {
         List<Videogame> videogames = videogameService.findAll();
         model.addAttribute("videogames", videogames);
+        model.addAttribute("username", authentication.getName());
         return "videogames/index";
     }
 

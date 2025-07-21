@@ -8,6 +8,10 @@ a {
     text-decoration: none;
 }
 
+.username{
+    font-weight: 600;
+}
+
 /* Consoles */
 /* Consoles small icons */
 .container-consoles-list {
