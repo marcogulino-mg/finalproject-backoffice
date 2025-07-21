@@ -17,6 +17,7 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(requests -> requests
+                .requestMatchers("/api/**").permitAll()
                 .anyRequest().hasAuthority("ADMIN"))
                 .formLogin(Customizer.withDefaults())
                 .cors(cors -> cors.disable())
