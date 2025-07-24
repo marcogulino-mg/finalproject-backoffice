@@ -15,6 +15,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -61,6 +63,10 @@ public class Videogame {
     @Column(name = "cover_url", nullable = false, length = 255)
     @NotBlank(message = "cover url image must not be null, nor empty or blank")
     private String coverUrl;
+
+    // Explanation: slug identifier
+    @Column(name = "slug", nullable = false, unique = true, length = 100)
+    private String slug;
 
     // Explanation: ManyToMany join with Console entity
     @ManyToMany(fetch = FetchType.LAZY)
@@ -124,6 +130,14 @@ public class Videogame {
         this.coverUrl = coverUrl;
     }
 
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
     public List<Console> getConsoles() {
         return consoles;
     }
@@ -132,4 +146,17 @@ public class Videogame {
         this.consoles = consoles;
     }
 
+    // Other Methods
+    // Explanation: Generate Slug
+    @PrePersist
+    @PreUpdate
+    private void generateSlug() {
+        if (this.slug == null || this.slug.isBlank()) {
+            if (this.vgName != null && !this.vgName.isBlank()) {
+                this.slug = vgName.toLowerCase()
+                        .replaceAll("[^a-z0-9]+", "-")
+                        .replaceAll("^-|-$", "");
+            }
+        }
+    }
 }

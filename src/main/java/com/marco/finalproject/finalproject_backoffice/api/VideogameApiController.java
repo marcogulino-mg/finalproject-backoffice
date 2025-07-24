@@ -44,6 +44,16 @@ public class VideogameApiController {
         return new ResponseEntity<Videogame>(vgAttempt.get(), HttpStatus.OK);
     }
 
+    @GetMapping("/slug/{slug}")
+    public ResponseEntity<Videogame> show(@PathVariable String slug) {
+        Optional<Videogame> vgAttempt = videogameService.findBySlug(slug);
+        if (vgAttempt.isEmpty()) {
+            return new ResponseEntity<Videogame>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<Videogame>(vgAttempt.get(), HttpStatus.OK);
+    }
+
     // INFO: CREATE
     @PostMapping
     public ResponseEntity<Videogame> store(@Valid @RequestBody Videogame videogame) {

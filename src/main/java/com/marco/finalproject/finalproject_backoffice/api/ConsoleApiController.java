@@ -44,6 +44,16 @@ public class ConsoleApiController {
         return new ResponseEntity<Console>(consoleAttempt.get(), HttpStatus.OK);
     }
 
+    @GetMapping("/slug/{slug}")
+    public ResponseEntity<Console> show(@PathVariable String slug) {
+        Optional<Console> consoleAttempt = consoleService.findBySlug(slug);
+        if (consoleAttempt.isEmpty()) {
+            return new ResponseEntity<Console>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<Console>(consoleAttempt.get(), HttpStatus.OK);
+    }
+
     // INFO: CREATE
     @PostMapping
     public ResponseEntity<Console> store(@Valid @RequestBody Console console) {

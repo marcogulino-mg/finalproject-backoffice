@@ -42,6 +42,21 @@ public class ConsoleService {
         return consoleAttempt.get();
     }
 
+    // Explanation: Find single console using slug
+    public Optional<Console> findBySlug(String slug) {
+        return consoleRepo.findBySlug(slug);
+    }
+
+    // Explanation: Check if the console exists and get it
+    public Console getBySlug(String slug) {
+        Optional<Console> consoleAttempt = findBySlug(slug);
+        if (consoleAttempt.isEmpty()) {
+            throw new MissingElementException("Console non trovata");
+        }
+
+        return consoleAttempt.get();
+    }
+
     // Explanation: Delete by ID
     public void deleteById(int id) {
         if (existsById(id)) {

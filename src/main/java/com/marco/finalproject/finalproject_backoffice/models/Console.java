@@ -15,6 +15,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -60,6 +62,10 @@ public class Console {
     @Column(name = "small_icon_url", nullable = false, length = 255)
     @NotBlank(message = "The icon url image must not be null, nor empty or blank")
     private String smallIconUrl;
+
+    // Explanation: slug identifier
+    @Column(name = "slug", nullable = false, unique = true, length = 100)
+    private String slug;
 
     @ManyToMany(mappedBy = "consoles", fetch = FetchType.LAZY)
     @JsonBackReference
@@ -122,12 +128,34 @@ public class Console {
         this.smallIconUrl = smallIconUrl;
     }
 
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
     public List<Videogame> getVideogames() {
         return videogames;
     }
 
     public void setVideogames(List<Videogame> videogames) {
         this.videogames = videogames;
+    }
+
+    // Other Methods
+    // Explanation: Generate Slug
+    @PrePersist
+    @PreUpdate
+    private void generateSlug() {
+        if (this.slug == null || this.slug.isBlank()) {
+            if (this.consoleName != null && !this.consoleName.isBlank()) {
+                this.slug = consoleName.toLowerCase()
+                        .replaceAll("[^a-z0-9]+", "-")
+                        .replaceAll("^-|-$", "");
+            }
+        }
     }
 
 }

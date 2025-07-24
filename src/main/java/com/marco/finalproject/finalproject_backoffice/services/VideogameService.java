@@ -31,6 +31,21 @@ public class VideogameService {
         return videogameRepo.findById(id);
     }
 
+    // Explanation: Find single videogame using slug
+    public Optional<Videogame> findBySlug(String slug) {
+        return videogameRepo.findBySlug(slug);
+    }
+
+    // Explanation: Check if the videogame exists and get it
+    public Videogame getBySlug(String slug) {
+        Optional<Videogame> vgAttempt = findBySlug(slug);
+        if (vgAttempt.isEmpty()) {
+            throw new MissingElementException("Videogame non trovato");
+        }
+
+        return vgAttempt.get();
+    }
+
     // Explanation: Check if the videogame exists and get it
     public Videogame getById(int id) {
         Optional<Videogame> vgAttempt = findById(id);
