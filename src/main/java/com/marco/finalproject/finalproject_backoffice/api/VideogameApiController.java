@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marco.finalproject.finalproject_backoffice.models.Videogame;
@@ -31,6 +32,13 @@ public class VideogameApiController {
     @GetMapping
     public List<Videogame> index() {
         List<Videogame> videogames = videogameService.findAll();
+        return videogames;
+    }
+
+    // INFO: SEARCH by name
+    @GetMapping("/search")
+    public List<Videogame> searchByName(@RequestParam String vgName) {
+        List<Videogame> videogames = videogameService.searchByName(vgName);
         return videogames;
     }
 

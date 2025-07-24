@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marco.finalproject.finalproject_backoffice.models.Console;
@@ -31,6 +32,13 @@ public class ConsoleApiController {
     @GetMapping
     public List<Console> index() {
         List<Console> consoles = consoleService.findAll();
+        return consoles;
+    }
+
+    // INFO: SEARCH by name
+    @GetMapping("/search")
+    public List<Console> searchByName(@RequestParam String consoleName) {
+        List<Console> consoles = consoleService.searchByName(consoleName);
         return consoles;
     }
 
