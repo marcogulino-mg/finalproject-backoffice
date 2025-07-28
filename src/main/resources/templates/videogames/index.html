@@ -8,6 +8,7 @@
   <body>
     <th:block th:replace="~{ fragments/header :: header-frag('videogames') }"></th:block>
     <main class="container">
+      <a class="btn btn-info mt-3" th:href="@{/videogames/create}" role="button">Create Videogame</a>
       <table class="table">
         <thead>
           <tr>
@@ -16,7 +17,7 @@
             <th scope="col">Publication Date</th>
             <th scope="col">Publisher</th>
             <th scope="col">Developer</th>
-            <th scope="col">Gestione</th>
+            <th scope="col">Management</th>
           </tr>
         </thead>
         <tbody>
@@ -28,14 +29,14 @@
             <td th:text="${videogame.developer}"></td>
             <td>
               <a class="btn btn-info" th:href="@{|/videogames/${videogame.id}|}" role="button">Info</a>
-              <a class="btn btn-warning" th:href="@{|/videogames/edit/${videogame.id}|}" role="button">Modifica</a>
+              <a class="btn btn-warning" th:href="@{|/videogames/edit/${videogame.id}|}" role="button">Edit</a>
               <button
                 class="btn btn-danger"
                 type="button"
                 data-bs-toggle="modal"
                 th:data-bs-target="'#delete-modal-' + ${videogame.id}"
               >
-                Rimuovi
+                Delete
               </button>
 
               <!-- Modal -->
@@ -50,7 +51,7 @@
                       <div class="modal-header">
                         <h1
                           class="modal-title fs-5"
-                          th:text="|Rimozione di ${videogame.vgName}|"
+                          th:text="|Deleting ${videogame.vgName}|"
                         ></h1>
                         <button
                           type="button"
@@ -61,7 +62,7 @@
                       </div>
                       <div class="modal-body">
                         <h6
-                          th:text="|Confermi di voler rimuovere ${videogame.vgName} con id: ${videogame.id}|"
+                          th:text="|Do you want to remove ${videogame.vgName} with id: ${videogame.id}|"
                         ></h6>
                       </div>
                       <div class="modal-footer">

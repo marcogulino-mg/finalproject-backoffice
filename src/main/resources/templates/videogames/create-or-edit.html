@@ -18,7 +18,7 @@
       >
         <input type="hidden" th:field="*{id}" />
         <div class="mb-3">
-          <label for="vgName" class="form-label">Nome Videogioco</label>
+          <label for="vgName" class="form-label">Videogame name</label>
           <input
             type="text"
             class="form-control"
@@ -36,9 +36,7 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="publicationDate" class="form-label"
-            >Data di Pubblicazione</label
-          >
+          <label for="publicationDate" class="form-label">Release Date</label>
           <div class="input-group">
             <input
               type="date"
@@ -104,7 +102,7 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="description" class="form-label">Descrizione</label>
+          <label for="description" class="form-label">Description</label>
           <textarea
             class="form-control"
             aria-label="With textarea"
@@ -171,7 +169,7 @@
         <button
           type="submit"
           class="btn btn-primary"
-          th:text="${edit} ? 'Modifica Videogame' : 'Aggiungi Videogame'"
+          th:text="${edit} ? 'Edit Videogame' : 'Add Videogame'"
         ></button>
         <button type="reset" class="btn btn-warning">Reset Form</button>
       </form>

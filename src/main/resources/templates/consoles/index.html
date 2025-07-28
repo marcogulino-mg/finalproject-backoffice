@@ -15,7 +15,7 @@
             <th scope="col">Name</th>
             <th scope="col">Release Date</th>
             <th scope="col">Publisher</th>
-            <th scope="col">Gestione</th>
+            <th scope="col">Managment</th>
           </tr>
         </thead>
         <tbody>
@@ -26,14 +26,14 @@
             <td th:text="${console.publisher}"></td>
             <td>
               <a class="btn btn-info" th:href="@{|/consoles/${console.id}|}" role="button">Info</a>
-              <a class="btn btn-warning" th:href="@{|/consoles/edit/${console.id}|}" role="button">Modifica</a>
+              <a class="btn btn-warning" th:href="@{|/consoles/edit/${console.id}|}" role="button">Edit</a>
               <button
                 class="btn btn-danger"
                 type="button"
                 data-bs-toggle="modal"
                 th:data-bs-target="'#delete-modal-' + ${console.id}"
               >
-                Rimuovi
+                Delete
               </button>
 
               <!-- Modal -->
@@ -48,7 +48,7 @@
                       <div class="modal-header">
                         <h1
                           class="modal-title fs-5"
-                          th:text="|Rimozione di ${console.consoleName}|"
+                          th:text="|Deleting ${console.consoleName}|"
                         ></h1>
                         <button
                           type="button"
@@ -59,7 +59,7 @@
                       </div>
                       <div class="modal-body">
                         <h6
-                          th:text="|Confermi di voler rimuovere ${console.consoleName} con id: ${console.id}|"
+                          th:text="|Do you want to remove ${console.consoleName} with id: ${console.id}|"
                         ></h6>
                       </div>
                       <div class="modal-footer">
@@ -68,9 +68,9 @@
                           class="btn btn-secondary"
                           data-bs-dismiss="modal"
                         >
-                          Annulla
+                          Go Back
                         </button>
-                        <button class="btn btn-primary" type="submit">Conferma</button>
+                        <button class="btn btn-primary" type="submit">Confirm</button>
                       </div>
                     </form>
                   </div>

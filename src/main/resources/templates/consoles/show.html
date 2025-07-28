@@ -25,7 +25,7 @@
           <div class="card h-100">
             <h5 class="card-header" th:text="*{consoleName}"></h5>
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Descrizione</h5>
+              <h5 class="card-title">Description</h5>
               <p
                 th:if="${console.description != null and !console.description.isEmpty()}"
                 th:text="${console.description}"
@@ -36,20 +36,18 @@
               ></p>
               <h5 class="card-title">Publisher</h5>
               <p class="card-text" th:text="*{publisher}"></p>
-              <h5 class="card-title">Data di Vendità</h5>
+              <h5 class="card-title">Release Date</h5>
               <p
                 class="card-text"
                 th:text="${#temporals.format(console.releaseDate, 'dd/MM/yyyy')}"
               ></p>
               <div class="mt-auto">
-                <a th:href="@{/consoles}" class="btn btn-primary"
-                  >Torna alla lista</a
-                >
+                <a th:href="@{/consoles}" class="btn btn-primary">Go Back</a>
                 <a
                   class="btn btn-warning"
                   th:href="@{|/consoles/edit/${console.id}|}"
                   role="button"
-                  >Modifica</a
+                  >Edit</a
                 >
                 <button
                   class="btn btn-danger"
@@ -72,7 +70,7 @@
                         <div class="modal-header">
                           <h1
                             class="modal-title fs-5"
-                            th:text="|Rimozione di ${console.consoleName}|"
+                            th:text="|Deleting ${console.consoleName}|"
                           ></h1>
                           <button
                             type="button"
@@ -83,7 +81,7 @@
                         </div>
                         <div class="modal-body">
                           <h6
-                            th:text="|Confermi di voler rimuovere ${console.consoleName} con id: ${console.id}|"
+                            th:text="|Do you want to remove ${console.consoleName} with id: ${console.id}|"
                           ></h6>
                         </div>
                         <div class="modal-footer">
@@ -92,10 +90,10 @@
                             class="btn btn-secondary"
                             data-bs-dismiss="modal"
                           >
-                            Annulla
+                            Go Back
                           </button>
                           <button class="btn btn-primary" type="submit">
-                            Conferma
+                            Confirm
                           </button>
                         </div>
                       </form>
